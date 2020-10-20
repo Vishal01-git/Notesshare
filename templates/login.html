@@ -1,0 +1,91 @@
+{% extends 'navigation.html' %}
+{% block head %}
+<style>
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(219, 226, 226) !important;
+}
+.row{
+    background: white;
+    border-radius: 30px;
+    box-shadow: 12px 12px 22px grey;
+}
+
+img{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.btn1{
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.btn1:hover{
+    background: white;
+    border: 1px solid;
+    color: black;
+}
+</style>
+{% endblock head %}
+{% block title %}Login{% endblock title %}
+
+{% block body %}
+{% ifequal error "no" %}
+<script>
+alert('Logged In Successfully');
+window.location = ('{% url 'profile' %}');
+</script>
+{% endifequal %}
+
+{% ifequal error "yes"%}
+<script>
+alert('Invalid Login credential, Try Again');
+</script>
+{% endifequal %}
+<section class="Form my-4 mx-5">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-lg-5">
+                <img src="/static/images/login1.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-7 px-5 pt-5">
+                <h1 class="font-weight-bold py-3">Welcome</h1>
+                <h4>Sign into your account</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                  <div class="form-row">
+                      <div class="col-lg-7">
+                          <input type="email" placeholder="Email Address" class="form-control my-3 p-4" name="emailid">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="password" placeholder="*********" class="form-control my-3 p-4" name="pwd">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                      <input type="submit" class="btn1 mt-3 mb-5 " value="LOGIN"> 
+                    </div>
+                </div>
+                <a href="#">Forget password</a>
+                <p>Don't have an account? <a href="{% url 'signup' %}">Register here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock body %}

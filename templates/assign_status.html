@@ -1,0 +1,40 @@
+{% extends 'admin_nav.html' %}
+{% block title %}MyNotes{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+{% block body %}
+
+{% ifequal error "no" %}
+<script>
+alert('Status Updated Successfully');
+window.location = ('{% url 'assign_status' %}');
+</script>
+{% endifequal %}
+
+{% ifequal error "yes"%}
+<script>
+alert('Something went wrong, Try Again');
+</script>
+{% endifequal %}
+<div class="container mt-5">
+
+    <h2 class="text-center">Assign Status</h2>
+   <hr>
+  <form method="POST">
+      <label>Notes Id</label>
+      <input type="text" name="notesid" class="form-control">
+      <label>Status</label>
+      <select name="status" class="form-control">
+      <option value="Accept">Accept</option>
+      <option value="Reject">Reject</option>
+      </select>
+      <br>
+      <input type="submit" value="Submit">
+  </form>
+
+
+</div>
+</div>
+
+{% endblock body %}
