@@ -72,8 +72,13 @@ def signup1(request):
 
 def admin_home(request):
     if not request.user.is_staff:
-        return redirect('login_admin.html')
-    return render(request,'admin_home.html')
+        return redirect('login_admin')
+    pn = Notes.objects.filter(status="Pending").count()
+    an = Notes.objects.filter(status="Accept").count()
+    rn = Notes.objects.filter(status="Reject").count()
+    alln = Notes.objects.all().count()
+    d = {'pn':pn,'an':an,'rn':rn,'alln':alln} 
+    return render(request,'admin_home.html',d)
 
 
 def Logout(request):
@@ -167,7 +172,30 @@ def pending_notes(request):
         return redirect('login_admin')
     notes = Notes.objects.filter(status="Pending")
     d = {'notes':notes}
-    return render(request,'pending_notes.html',d)    
+    return render(request,'pending_notes.html',d)
+
+
+def accepted_notes(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    notes = Notes.objects.filter(status="Accept")
+    d = {'notes':notes}
+    return render(request,'accepted_notes.html',d)
+
+def rejected_notes(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    notes = Notes.objects.filter(status="Reject")
+    d = {'notes':notes}
+    return render(request,'rejected_notes.html',d)
+
+
+def all_notes(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    notes = Notes.objects.all()
+    d = {'notes':notes}
+    return render(request,'all_notes.html',d)        
 
 
 def delete_mynotes(request,pid):
@@ -211,9 +239,27 @@ def assign_status(request,pid):
 
         try:
             notes.status=s
+            notes.save()
             error="no"
 
         except:
             error="yes"    
     d={'notes':notes,'error':error}        
-    return redirect(request,'assign_status.html',d) 
+    return render(request,'assign_status.html',d) 
+
+
+def delete_notes(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    notes=Notes.objects.get(id=pid)
+    notes.delete()
+    return redirect('all_notes')
+
+
+def viewallnotes(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    notes = Notes.objects.filter(status="Accept")
+    d = {'notes':notes}
+    return render(request,'viewallnotes.html',d)     

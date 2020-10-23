@@ -8,7 +8,7 @@
 {% ifequal error "no" %}
 <script>
 alert('Status Updated Successfully');
-window.location = ('{% url 'assign_status' %}');
+window.location = ('{% url 'all_notes' %}');
 </script>
 {% endifequal %}
 
@@ -22,15 +22,16 @@ alert('Something went wrong, Try Again');
     <h2 class="text-center">Assign Status</h2>
    <hr>
   <form method="POST">
+  {% csrf_token %}
       <label>Notes Id</label>
-      <input type="text" name="notesid" class="form-control">
+      <input type="text" name="notesid" class="form-control" value="{{notes.id}}" readonly>
       <label>Status</label>
       <select name="status" class="form-control">
       <option value="Accept">Accept</option>
       <option value="Reject">Reject</option>
       </select>
       <br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" class="btn btn-dark form-control" >
   </form>
 
 

@@ -42,7 +42,7 @@
 {% ifequal error "no" %}
 <script>
 alert('File Uploaded Successfully');
-{% comment %} window.location = ('{% url 'login' %}'); {% endcomment %}
+ window.location = ('{% url 'view_mynotes' %}'); 
 </script>
 {% endifequal %}
 

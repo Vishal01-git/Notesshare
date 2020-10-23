@@ -33,9 +33,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'pending_notes' %}">PENDING</a>
-          <a class="dropdown-item" href="#">ACCEPTED</a>
-          <a class="dropdown-item" href="#">REJECTED</a>
-          <a class="dropdown-item" href="#">ALL NOTES</a>
+          <a class="dropdown-item" href="{% url 'accepted_notes' %}">ACCEPTED</a>
+          <a class="dropdown-item" href="{% url 'rejected_notes' %}">REJECTED</a>
+          <a class="dropdown-item" href="{% url 'all_notes' %}">ALL NOTES</a>
         </div>
       </li>
        <li class="nav-item">
