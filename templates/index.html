@@ -3,17 +3,6 @@
 {% block title %}Home{% endblock title %}
 
 {% block body %}
-<script language="JavaScript">
-$(document).bind("contextmenu",function(e) {
- e.preventDefault();
-});
-$(document).keydown(function(e){
-    if(e.ctrlKey && (e.which === 83)){
-       e.preventDefault();
-       return false;
-    }
-});
-</script>
 <div class="container-fluid px-0">
 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
