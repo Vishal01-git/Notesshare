@@ -27,4 +27,4 @@ urlpatterns = [
    path('assign_status/<int:pid>',views.assign_status,name="assign_status"),
     path('delete_notes/<int:pid>',views.delete_notes,name="delete_notes"),
      path('viewallnotes',views.viewallnotes,name='viewallnotes'),
-]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
